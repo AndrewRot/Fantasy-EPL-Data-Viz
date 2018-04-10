@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Round About - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/round-about.css" rel="stylesheet">
+
+    <!-- Request data from server -->
+    <link href="../css/round-about.css" rel="stylesheet">
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 56px;
+        left: 0%;
+        z-index: 5;
+        background-color: #343a40;
+        padding: 0px;
+        /*border: 1px solid #999;*/
+        text-align: left;
+        color: #fff;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 2px;
+        padding-right: 2px;
+        opacity: 0.8;
+      }
+      #floating-panel-text {
+        position: absolute;
+        top: 56px;
+        left: 0%;
+        z-index: 5;
+        background-color: #343a40;
+        padding: 0px;
+        /*border: 1px solid #999;*/
+        text-align: left;
+        color: #fff;
+        font-size: 10px;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 2px;
+        padding-right: 2px;
+        opacity: 1;
+        font-size: small;
+      }
+      #floating-panel-title {
+        text-align: center;
+        opacity: 1;
+      }
+      .h3, h3 {
+        font-size: 1.75rem;
+        text-align: center;
+        opacity: 1;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <script>
+        function noscroll() {
+            window.scrollTo( 0, 0 );
+        }
+        // add listener to disable scroll
+        window.addEventListener('scroll', noscroll);
+    </script>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Fantasy Premier League Point Totals</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item active">
+              <a class="nav-link" onclick="alert('This is a data visualization of the current English Premier League team. The size of each team\'s badge corresponds to the total number of Fantasy Premier League points a team\'s player\'s have collected over teh course of the season. Data has been normalized and badges are proportional to the normalized score' );" href="#">About
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" onclick="window.location.replace('http://stackoverflow.com');" href="#">Andrew Rottier
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="floating-panel">
+      <!--<button id="drop" onclick="startViz()">Drop Markers</button>-->
+
+    </div>
+
+
+
+    <div id="map"></div>
+    <script>
+
+      //lat closer to 0 is down
+      //long closer to 0 is right
+
+        var teamLocations = Object.freeze({
+            "A.F.C. Bournemouth": {"location": "Dean Court", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg", "lat": 50.73523059999999, "long":-1.8382791000000225},
+            "Arsenal": {"location": "Emirates Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg", "lat": 51.5548885, "long": -0.10843799999997827},
+            "Brighton & Hove Albion F.C.": {"location": "Falmer Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t36.svg", "lat":50.8615651, "long":-0.08371629999999186},
+            "Burnley F.C.": {"location": "Turf Moor", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t90.svg", "lat":53.7890244, "long":-2.2301735999999437},
+            "Chelsea": {"location": "Stamford Bridge", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t8.svg", "lat":51.381663, "long":-0.36095649999997022},
+            "Crystal Palace F.C.": {"location": "Selhurst Park", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t31.svg", "lat":51.2782531, "long":0.49548670000004677},
+            "Everton": {"location": "Goodison Park", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t11.svg", "lat":53.438787, "long": -2.866319300000009},
+            "Huddersfield Town": {"location": "John Smiths Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t38.svg", "lat":53.6542822, "long":-1.7682517000000644},
+            "Leicester City F.C.": {"location": "King Power Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t13.svg", "lat":52.6203662, "long": -1.1421894999999722},
+            "Liverpool F.C.": {"location": "Anfield", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t14.svg", "lat": 53.4308294, "long": -3.260829999999987},
+            "Manchester City F.C.": {"location": "City of Manchester Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t43.svg", "lat": 53.48313810000001,"long": -2.5503952999999683},
+            "Manchester United F.C.": {"location": "Old Trafford", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t1.svg", "lat":53.4630589,"long": -2.0913401000000704},
+            "Newcastle United F.C.": {"location": "St James Park", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t4.svg", "lat": 54.975556, "long": -1.621667},
+            "Southampton F.C.": {"location": "St Marys Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t20.svg", "lat": 50.9058218, "long": -1.3909539999999652},
+            "Stoke City F.C.": {"location": "Britannia Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t110.svg", "lat":52.9881046,"long": -2.176429800000051},
+            "Swansea City A.F.C.": {"location" : "Liberty Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t80.svg", "lat": 51.6427499, "long": -3.9345855000000256},
+            "Tottenham Hotspur F.C.": {"location": "White Hart Lane", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t6.svg", "lat": 51.8032123, "long": -0.06573890000004212},
+            "Watford F.C.": {"location": "Vicarage Road", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t57.svg", "lat":51.6499059,"long":-0.601525},
+            "West Bromwich Albion F.C.": {"location": "The Hawthorns", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t35.svg", "lat":52.509038,"long":-1.963938},
+            "West Ham United F.C.": {"location": "Olympic Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t21.svg" , "lat": 51.5387095, "long": 0.2366037},
+        })
+        //console.log(teamLocations);
+
+
+        var url = "data";
+
+        $(document).ready(function () {
+           startViz()
+        });
+
+        function startViz() {
+            //your code here
+            $.get(url, {}, function (data) {
+                //contains raw point totals
+                data = JSON.parse(data);
+
+                //Normalize the data
+                normalizedData = normalizeData(data);
+                console.log(normalizedData);
+
+                //plot these points
+                initMap(normalizedData);
+
+                //generate leaderboard
+                generateLeaderboard(normalizedData.reverse());
+
+            });
+        }
+
+        function generateLeaderboard(data){
+            //var numbers = [4, 9, 16, 25];
+
+            //function myFunction() {
+            x = document.getElementById("floating-panel");
+
+            panelContent = '<div id="floating-panel-title">' +
+                '<a href=\"https://www.seeklogo.net/?p=30402\" target=\"_blank\"><img src=\"https://www.seeklogo.net/wp-content/uploads/2012/12/premier-league-logo-vector-400x400.png\" style="width:100px;height:100px;" alt=\"Premier League logo vector free download\" /></a>' +
+                '</div>';
+
+            panelContent += "<H3>EPL Leaders</H3>";
+            panelContent += "<div id = 'floating-panel-text>'><ol>";
+
+            for(var i = 0; i < data.length; i++){
+                panelContent += "<li>"+data[i].team+" - "+ data[i].totalPoints+"</li>"
+            }
+
+
+            panelContent += "</ol>";
+            panelContent += "</div>";
+            console.log(panelContent);
+            x.innerHTML = panelContent//data.map(Math.sqrt);
+            //}
+        }
+
+        /**
+         * iterate through to find max and min, then re-iterate to normalize the dataset
+         * @param data
+         * @returns {Promise}
+         */
+        function normalizeData(data) {
+            // Find max and min
+            var i, max = 0, min = 1000000;
+            for (var property in data) {
+                if (data.hasOwnProperty(property)) {
+                    if ( data[property] > max)
+                        max =  data[property];
+                    if ( data[property] < min)
+                        min = data[property];
+                }
+            }
+
+            var normalizedTeamData = {};
+            //iterate over the team names
+            for (var property in data) {
+                if (data.hasOwnProperty(property)) {
+                    normalizedTeamData[property] = {}
+                    normalizedTeamData[property]["team"] = property;
+                    normalizedTeamData[property]["totalPoints"] = data[property];
+                    normalizedTeamData[property]["normalized"] = (data[property] - min) / (max - min);
+
+                    normalizedTeamData[property]["location"] =teamLocations[property].location;
+                    normalizedTeamData[property]["logo"] =teamLocations[property].logo;
+                    normalizedTeamData[property]["lat"] =teamLocations[property].lat;
+                    normalizedTeamData[property]["long"] =teamLocations[property].long;
+
+                }
+            }
+            var sortable = $.map(normalizedTeamData, function(value) {
+                return [value];
+            });
+
+            //Sort worst to best
+            sortable.sort(function(a,b) {return (a.normalized > b.normalized) ? 1 : ((b.normalized > a.normalized) ? -1 : 0);} );
+
+            return (sortable);
+        }
+
+
+
+          var map;
+          function initMap(data) {
+              clearMarkers();
+              console.log("intitMap");
+              //https://www.google.com/maps/place/England,+UK/@52.9443128,-4.7391313,6.76z/data=!4m5!3m4!1s0x47d0a98a6c1ed5df:0xf4e19525332d8ea8!8m2!3d52.3555177!4d-1.1743197
+              //52.9443128,-4.7391313
+              var england = {lat: 53.5847062, lng: -4.2012866};
+              map = new google.maps.Map(document.getElementById('map'), {
+                  mapTypeId: 'terrain',
+                  zoom: 6.7,
+                  center: england,
+                  gestureHandling: 'none',
+//                  zoomControl: false,
+                  // TODO load this from seperate file
+                  styles: [{"elementType":"geometry","stylers":[{"color":"#ebe3cd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#523735"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f1e6"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#c9b2a6"}]},{"featureType":"administrative.land_parcel","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"geometry.stroke","stylers":[{"color":"#dcd2be"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ae9e90"}]},{"featureType":"administrative.neighborhood","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#93817c"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#a5b076"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#447530"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#f5f1e6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#fdfcf8"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#f8c967"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#e9bc62"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#e98d58"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#db8555"}]},{"featureType":"road.local","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#806b63"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"transit.line","elementType":"labels.text.fill","stylers":[{"color":"#8f7d77"}]},{"featureType":"transit.line","elementType":"labels.text.stroke","stylers":[{"color":"#ebe3cd"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#b9d3c2"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#92998d"}]}]
+              });
+
+              //Loop through team data and attach map pins
+              for(var i = 0; i < data.length; i++){
+                  geocodeAddress(map, data[i], i * 500)
+              }
+          }
+
+          function geocodeAddress(resultsMap, team, timeout){//location, logo, team, coords) {
+              window.setTimeout(function() {
+                coords = {lat: team.lat, lng: team.long};
+
+                //Generate area icon TODO change scale of badge based on normalized data ffield
+                var icon = {
+                    url: team.logo, // url
+                    scaledSize: new google.maps.Size(20+(30*team.normalized), 20+(30*team.normalized)), // scaled size -edit this
+                    origin: new google.maps.Point(0,0), // origin
+                    anchor: new google.maps.Point(20, 40) // anchor
+                };
+
+                //create model content
+                var contentString =
+                    '<div id="content">'+
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">'+team.team+'</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p>Stadium: '+team.location+'</p>'+
+                    '<p>Fantasy Points Total: '+team.totalPoints+'</p>'+
+                    '</div>'+
+                    '</div>';
+
+                //Generate model when clicked
+                var infowindow = new google.maps.InfoWindow({ content: contentString });
+
+                //create marker
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: coords,
+                    icon: icon,
+                    animation: google.maps.Animation.DROP,
+                    title: team.team
+                });
+
+
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
+
+                markers.push(marker)
+
+              }, timeout);
+          }
+
+      var markers = [];
+
+      //TODO integrate program with this if I want a better website
+      function addMarkerWithTimeout(position, timeout) {
+          window.setTimeout(function() {
+              markers.push(new google.maps.Marker({
+                  position: position,
+                  map: map,
+                  animation: google.maps.Animation.DROP
+              }));
+          }, timeout);
+      }
+
+      function clearMarkers() {
+          for (var i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+          }
+          markers = [];
+      }
+
+      //Leave in as call bak from google
+      function printHello(){ console.log("Hello") }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApMFNgnlm0SMUcH4I29LgrJbswaIyYDoU&callback=printHello">
+    </script>
+
+
+
+
+    <!-- Footer TODO possibly add this back in with my details -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,64 @@
+"A.F.C. Bournemouth": {"location": "Dean Court", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg", "lat": 50.73523059999999, "long":-1.8382791000000225},
+"Arsenal": {"location": "Emirates Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg", "lat": 51.5548885, "long": -0.10843799999997827},
+"Brighton & Hove Albion F.C.": {"location": "Falmer Stadium", "logo":"", "lat":50.8615651, "long":-0.08371629999999186},
+"Burnley F.C.": {"location": "Turf Moor", "logo":"", "lat":53.7890244, "long":-2.2301735999999437},
+"Chelsea": {"location": "Stamford Bridge", "logo":"", "lat":51.481663, "long":-0.19095649999997022},
+"Crystal Palace F.C.": {"location": "Selhurst Park", "logo":"", "lat":51.3982531, "long":-0.08548670000004677},
+"Everton": {"location": "Goodison Park", "logo":"", "lat":53.438787, "long": -2.966319300000009},
+"Huddersfield Town": {"location": "John Smiths Stadium", "logo":"", "lat":53.6542822, "long":-1.7682517000000644},
+"Leicester City F.C.": {"location": "King Power Stadium", "logo":"", "lat":52.6203662, "long": -1.1421894999999722},
+"Liverpool F.C.": {"location": "Anfield", "logo":"", "lat": 53.4308294, "long": -2.960829999999987},
+"Manchester City F.C.": {"location": "City of Manchester Stadium", "logo":"", "lat": 53.48313810000001,"long": -2.2003952999999683},
+"Manchester United F.C.": {"location": "Old Trafford", "logo":"", "lat":53.4630589,"long": -2.2913401000000704},
+"Newcastle United F.C.": {"location": "St James Park", "logo":"", "lat": 54.975556, "long": -1.621667},
+"Southampton F.C.": {"location": "St Marys Stadium", "logo":"", "lat": 50.9058218, "long": -1.3909539999999652},
+"Stoke City F.C.": {"location": "Britannia Stadium", "logo":"", "lat":52.9881046,"long": -2.176429800000051},
+"Swansea City A.F.C.": {"location" : "Liberty Stadium", "logo":"", "lat": 51.6427499, "long": -3.9345855000000256},
+"Tottenham Hotspur F.C.": {"location": "White Hart Lane", "logo":"", "lat": 51.6032123, "long": -0.06573890000004212},
+"Watford F.C.": {"location": "Vicarage Road", "logo":"", "lat":51.6499059,"long":-0.401525},
+"West Bromwich Albion F.C.": {"location": "The Hawthorns", "logo":"", "lat":52.509038,"long":-1.963938},
+"West Ham United F.C.": {"location": "Olympic Stadium", "logo":"" , "lat": 51.5387095, "long": -0.0166037},
+
+
+lat, long
+(50.73523059999999, -1.8382791000000225)
+
+, long
+, "lat": 50.73523059999999, "long":-1.8382791000000225
+
+
+
+, "lat":
+"long":
+
+
+
+, "lat":52.509038,"long":-1.963938
+
+
+
+
+
+//old
+ var teamLocations = Object.freeze({
+            "A.F.C. Bournemouth": {"location": "Dean Court", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg"},
+            "Arsenal": {"location": "Emirates Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg"},
+            "Brighton & Hove Albion F.C.": {"location": "Falmer Stadium", "logo":""},
+            "Burnley F.C.": {"location": "Turf Moor", "logo":""},
+            "Chelsea": {"location": "Stamford Bridge", "logo":""},
+            "Crystal Palace F.C.": {"location": "Selhurst Park", "logo":""},
+            "Everton": {"location": "Goodison Park", "logo":""},
+            "Huddersfield Town": {"location": "John Smiths Stadium", "logo":""},
+            "Leicester City F.C.": {"location": "King Power Stadium", "logo":""},
+            "Liverpool F.C.": {"location": "Anfield", "logo":"https://www.seeklogo.net/wp-content/uploads/2011/08/liverpool-logo-vector-400x400.png"},
+            "Manchester City F.C.": {"location": "City of Manchester Stadium", "logo":""},
+            "Manchester United F.C.": {"location": "Old Trafford", "logo":""},
+            "Newcastle United F.C.": {"location": "St James Park", "logo":""},
+            "Southampton F.C.": {"location": "St Marys Stadium", "logo":""},
+            "Stoke City F.C.": {"location": "Britannia Stadium", "logo":""},
+            "Swansea City A.F.C.": {"location" : "Liberty Stadium", "logo":""},
+            "Tottenham Hotspur F.C.": {"location": "White Hart Lane", "logo":""},
+            "Watford F.C.": {"location": "Vicarage Road", "logo":""},
+            "West Bromwich Albion F.C.": {"location": "The Hawthorns", "logo":""},
+            "West Ham United F.C.": {"location": "Olympic Stadium", "logo":""},
+        })
