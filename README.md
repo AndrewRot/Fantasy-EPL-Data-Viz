@@ -6,7 +6,7 @@ Context: Project completed for course Data Science 3001
 
 Project link: [Fantasy-Premier-League](https://fantasy-premier-league.herokuapp.com/)
 
-* Project built in 36 hours *
+* *Project built in 36 hours.*
 
 
 ---
