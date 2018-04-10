@@ -4,7 +4,9 @@ By: Andrew Rottier
 
 Context: Project completed for course Data Science 3001
 
-Project link: [Link to project live TODO](https://www.google.com)
+Project link: [Link to project live TODO](https://fantasy-premier-league.herokuapp.com/)
+
+* Project built in 36 hours *
 
 
 ---
