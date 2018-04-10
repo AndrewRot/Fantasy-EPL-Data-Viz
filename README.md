@@ -22,8 +22,11 @@ To run this program, clone the repository and then run the following commands fr
 
 
 ### Description
-This is a data visualization of the current English Premier League team. The size of each team's badge corresponds to the total number of Fantasy Premier League points a team's player's have collected over teh course of the season. Data has been normalized and badges are proportional to the normalized score.
+This is a data visualization of the current English Premier League team. The size of each team's badge corresponds to the total number of Fantasy Premier League points a team's player's have collected over the course of the season. Data has been normalized and badges are proportional to the normalized score.
 
+Data for this application is pulled each time the page is loaded from [Fantasy.PremierLeague.com](https://fantasy.premierleague.com/drf/bootstrap-static)
+
+Player data is then compiled and summarized to the total points earned by each team. Data is then fed to the client where it is normalized and plotted.
 
 ---
 
