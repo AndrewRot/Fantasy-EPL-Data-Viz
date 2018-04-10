@@ -1,13 +1,16 @@
 # Fantasy-EPL-Data-Viz
-By Andrew Rottier,
-Project completed for course Data Science 3001
-[Link to project live TODO](https://www.google.com)
+
+By: Andrew Rottier
+
+Context: Project completed for course Data Science 3001
+
+Project link: [Link to project live TODO](https://www.google.com)
 
 
 ---
 
 
-##### Running this program
+### Running this program
 To run this program, clone the repository and then run the following commands from within the main directory:
 `npm install`
 `node server`
