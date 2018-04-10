@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -14,9 +12,6 @@
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/round-about.css" rel="stylesheet">
-
-    <!-- Request data from server -->
     <link href="../css/round-about.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript -->
@@ -35,40 +30,8 @@
         margin: 0;
         padding: 0;
       }
-      #floating-panel {
-        position: absolute;
-        top: 56px;
-        left: 0%;
-        z-index: 5;
-        background-color: #343a40;
-        padding: 0px;
-        /*border: 1px solid #999;*/
-        text-align: left;
-        color: #fff;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 2px;
-        padding-right: 2px;
-        opacity: 0.8;
-      }
-      #floating-panel-text {
-        position: absolute;
-        top: 56px;
-        left: 0%;
-        z-index: 5;
-        background-color: #343a40;
-        padding: 0px;
-        /*border: 1px solid #999;*/
-        text-align: left;
-        color: #fff;
-        font-size: 10px;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 2px;
-        padding-right: 2px;
-        opacity: 1;
-        font-size: small;
-      }
+      #floating-panel { position: absolute;  top: 56px;  left: 0%;  z-index: 5;  background-color: #343a40; padding: 0px;  text-align: left;  color: #fff;  font-family: 'Roboto','sans-serif';  line-height: 30px;  padding-left: 2px;  padding-right: 2px;  opacity: 0.8;  }
+      #floating-panel-text {  position: absolute; top: 56px; left: 0%;  z-index: 5;  background-color: #343a40; padding: 0px;  text-align: left;  color: #fff;  font-size: 10px;  font-family: 'Roboto','sans-serif';  line-height: 30px;  padding-left: 2px;  padding-right: 2px;  opacity: 1;  font-size: small;   }
       #floating-panel-title {
         text-align: center;
         opacity: 1;
@@ -79,11 +42,9 @@
         opacity: 1;
       }
     </style>
-
   </head>
 
   <body>
-
     <script>
         function noscroll() {
             window.scrollTo( 0, 0 );
@@ -112,18 +73,12 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-
           </ul>
         </div>
       </div>
     </nav>
 
-    <div id="floating-panel">
-      <!--<button id="drop" onclick="startViz()">Drop Markers</button>-->
-
-    </div>
-
-
+    <div id="floating-panel"> </div>
 
     <div id="map"></div>
     <script>
@@ -182,9 +137,7 @@
         }
 
         function generateLeaderboard(data){
-            //var numbers = [4, 9, 16, 25];
 
-            //function myFunction() {
             x = document.getElementById("floating-panel");
 
             panelContent = '<div id="floating-panel-title">' +
@@ -198,12 +151,10 @@
                 panelContent += "<li>"+data[i].team+" - "+ data[i].totalPoints+"</li>"
             }
 
-
             panelContent += "</ol>";
             panelContent += "</div>";
             console.log(panelContent);
-            x.innerHTML = panelContent//data.map(Math.sqrt);
-            //}
+            x.innerHTML = panelContent
         }
 
         /**
@@ -349,9 +300,6 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApMFNgnlm0SMUcH4I29LgrJbswaIyYDoU&callback=printHello">
     </script>
 
-
-
-
     <!-- Footer TODO possibly add this back in with my details -->
     <footer class="py-5 bg-dark">
       <div class="container">
@@ -359,7 +307,5 @@
       </div>
       <!-- /.container -->
     </footer>
-
   </body>
-
 </html>
