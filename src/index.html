@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Round About - Start Bootstrap Template</title>
+    <title>Fantasy Premier League Point Totals Data Visualization</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,12 +31,11 @@
         padding: 0;
       }
       #floating-panel { position: absolute;  top: 56px;  left: 0%;  z-index: 5;  background-color: #343a40; padding: 0px;  text-align: left;  color: #fff;  font-family: 'Roboto','sans-serif';  line-height: 30px;  padding-left: 2px;  padding-right: 2px;  opacity: 0.8;  }
-      #floating-panel-text {  position: absolute; top: 56px; left: 0%;  z-index: 5;  background-color: #343a40; padding: 0px;  text-align: left;  color: #fff;  font-size: 10px;  font-family: 'Roboto','sans-serif';  line-height: 30px;  padding-left: 2px;  padding-right: 2px;  opacity: 1;  font-size: small;   }
       #floating-panel-title {
         text-align: center;
         opacity: 1;
       }
-      .h3, h3 {
+      h3 {
         font-size: 1.75rem;
         text-align: center;
         opacity: 1;
@@ -85,7 +84,6 @@
 
       //lat closer to 0 is down
       //long closer to 0 is right
-
         var teamLocations = Object.freeze({
             "A.F.C. Bournemouth": {"location": "Dean Court", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg", "lat": 50.73523059999999, "long":-1.8382791000000225},
             "Arsenal": {"location": "Emirates Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg", "lat": 51.5548885, "long": -0.10843799999997827},
@@ -107,9 +105,7 @@
             "Watford F.C.": {"location": "Vicarage Road", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t57.svg", "lat":51.6499059,"long":-0.601525},
             "West Bromwich Albion F.C.": {"location": "The Hawthorns", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t35.svg", "lat":52.509038,"long":-1.963938},
             "West Ham United F.C.": {"location": "Olympic Stadium", "logo":"https://platform-static-files.s3.amazonaws.com/premierleague/badges/t21.svg" , "lat": 51.5387095, "long": 0.2366037},
-        })
-        //console.log(teamLocations);
-
+        });
 
         var url = "data";
 
@@ -200,77 +196,74 @@
             return (sortable);
         }
 
+        var map;
+        function initMap(data) {
+            clearMarkers();
+            console.log("intitMap");
+            //https://www.google.com/maps/place/England,+UK/@52.9443128,-4.7391313,6.76z/data=!4m5!3m4!1s0x47d0a98a6c1ed5df:0xf4e19525332d8ea8!8m2!3d52.3555177!4d-1.1743197
+            //52.9443128,-4.7391313
+            var england = {lat: 53.5847062, lng: -4.2012866};
+            map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeId: 'terrain',
+                zoom: 6.7,
+                center: england,
+                gestureHandling: 'none',
+                // TODO load this from seperate file
+                styles: [{"elementType":"geometry","stylers":[{"color":"#ebe3cd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#523735"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f1e6"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#c9b2a6"}]},{"featureType":"administrative.land_parcel","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"geometry.stroke","stylers":[{"color":"#dcd2be"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ae9e90"}]},{"featureType":"administrative.neighborhood","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#93817c"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#a5b076"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#447530"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#f5f1e6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#fdfcf8"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#f8c967"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#e9bc62"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#e98d58"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#db8555"}]},{"featureType":"road.local","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#806b63"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"transit.line","elementType":"labels.text.fill","stylers":[{"color":"#8f7d77"}]},{"featureType":"transit.line","elementType":"labels.text.stroke","stylers":[{"color":"#ebe3cd"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#b9d3c2"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#92998d"}]}]
+            });
 
+            //Loop through team data and attach map pins
+            for(var i = 0; i < data.length; i++){
+                geocodeAddress(map, data[i], i * 500)
+            }
+        }
 
-          var map;
-          function initMap(data) {
-              clearMarkers();
-              console.log("intitMap");
-              //https://www.google.com/maps/place/England,+UK/@52.9443128,-4.7391313,6.76z/data=!4m5!3m4!1s0x47d0a98a6c1ed5df:0xf4e19525332d8ea8!8m2!3d52.3555177!4d-1.1743197
-              //52.9443128,-4.7391313
-              var england = {lat: 53.5847062, lng: -4.2012866};
-              map = new google.maps.Map(document.getElementById('map'), {
-                  mapTypeId: 'terrain',
-                  zoom: 6.7,
-                  center: england,
-                  gestureHandling: 'none',
-//                  zoomControl: false,
-                  // TODO load this from seperate file
-                  styles: [{"elementType":"geometry","stylers":[{"color":"#ebe3cd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#523735"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f1e6"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#c9b2a6"}]},{"featureType":"administrative.land_parcel","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"geometry.stroke","stylers":[{"color":"#dcd2be"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#ae9e90"}]},{"featureType":"administrative.neighborhood","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#93817c"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#a5b076"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#447530"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#f5f1e6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#fdfcf8"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#f8c967"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#e9bc62"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry","stylers":[{"color":"#e98d58"}]},{"featureType":"road.highway.controlled_access","elementType":"geometry.stroke","stylers":[{"color":"#db8555"}]},{"featureType":"road.local","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#806b63"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"transit.line","elementType":"labels.text.fill","stylers":[{"color":"#8f7d77"}]},{"featureType":"transit.line","elementType":"labels.text.stroke","stylers":[{"color":"#ebe3cd"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#dfd2ae"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#b9d3c2"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#92998d"}]}]
+        function geocodeAddress(resultsMap, team, timeout){//location, logo, team, coords) {
+            window.setTimeout(function() {
+              coords = {lat: team.lat, lng: team.long};
+
+              //Generate area icon TODO change scale of badge based on normalized data ffield
+              var icon = {
+                  url: team.logo, // url
+                  scaledSize: new google.maps.Size(20+(30*team.normalized), 20+(30*team.normalized)), // scaled size -edit this
+                  origin: new google.maps.Point(0,0), // origin
+                  anchor: new google.maps.Point(20, 40) // anchor
+              };
+
+              //create model content
+              var contentString =
+                  '<div id="content">'+
+                  '<div id="siteNotice">'+
+                  '</div>'+
+                  '<h1 id="firstHeading" class="firstHeading">'+team.team+'</h1>'+
+                  '<div id="bodyContent">'+
+                  '<p>Stadium: '+team.location+'</p>'+
+                  '<p>Fantasy Points Total: '+team.totalPoints+'</p>'+
+                  '<p>Normalized Score: '+team.normalized+'</p>'+
+                  '</div>'+
+                  '</div>';
+
+              //Generate model when clicked
+              var infowindow = new google.maps.InfoWindow({ content: contentString });
+
+              //create marker
+              var marker = new google.maps.Marker({
+                  map: resultsMap,
+                  position: coords,
+                  icon: icon,
+                  animation: google.maps.Animation.DROP,
+                  title: team.team
               });
 
-              //Loop through team data and attach map pins
-              for(var i = 0; i < data.length; i++){
-                  geocodeAddress(map, data[i], i * 500)
-              }
-          }
 
-          function geocodeAddress(resultsMap, team, timeout){//location, logo, team, coords) {
-              window.setTimeout(function() {
-                coords = {lat: team.lat, lng: team.long};
+              marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+              });
 
-                //Generate area icon TODO change scale of badge based on normalized data ffield
-                var icon = {
-                    url: team.logo, // url
-                    scaledSize: new google.maps.Size(20+(30*team.normalized), 20+(30*team.normalized)), // scaled size -edit this
-                    origin: new google.maps.Point(0,0), // origin
-                    anchor: new google.maps.Point(20, 40) // anchor
-                };
+              markers.push(marker)
 
-                //create model content
-                var contentString =
-                    '<div id="content">'+
-                    '<div id="siteNotice">'+
-                    '</div>'+
-                    '<h1 id="firstHeading" class="firstHeading">'+team.team+'</h1>'+
-                    '<div id="bodyContent">'+
-                    '<p>Stadium: '+team.location+'</p>'+
-                    '<p>Fantasy Points Total: '+team.totalPoints+'</p>'+
-                    '<p>Normalized Score: '+team.normalized+'</p>'+
-                    '</div>'+
-                    '</div>';
-
-                //Generate model when clicked
-                var infowindow = new google.maps.InfoWindow({ content: contentString });
-
-                //create marker
-                var marker = new google.maps.Marker({
-                    map: resultsMap,
-                    position: coords,
-                    icon: icon,
-                    animation: google.maps.Animation.DROP,
-                    title: team.team
-                });
-
-
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
-
-                markers.push(marker)
-
-              }, timeout);
-          }
+            }, timeout);
+        }
 
       var markers = [];
 

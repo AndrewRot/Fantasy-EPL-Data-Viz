@@ -1,8 +1,8 @@
 {
-    "title": "Round About",
-    "name": "startbootstrap-round-about",
-    "version": "4.0.0",
-    "description": "An about page HTML template built with Bootstrap",
+    "title": "Fantasy Premier League Point Totals",
+    "name": "antasy Premier League Point Totals Data Visualization",
+    "version": "1.0.0",
+    "description": "This is a data visualization of the current English Premier League team. The size of each team's badge corresponds to the total number of Fantasy Premier League points a team's player's have collected over the course of the season. Data has been normalized and badges are proportional to the normalized score.",
     "keywords": [
         "css",
         "sass",
@@ -11,19 +11,20 @@
         "theme",
         "template"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/round-about",
+    "homepage": "https://fantasy-premier-league.herokuapp.com/",
     "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-round-about/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "https://github.com/AndrewRot/Fantasy-EPL-Data-Viz/issues",
+        "email": "andrewrottier95@gmail.com"
     },
     "license": "MIT",
     "author": "Start Bootstrap",
     "contributors": [
-        "David Miller (http://davidmiller.io/)"
+        "David Miller (http://davidmiller.io/)",
+        "Andrew Rottier"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-round-about.git"
+        "url": "https://github.com/AndrewRot/Fantasy-EPL-Data-Viz"
     },
     "dependencies": {
         "bootstrap": "4.0.0",
