@@ -1,6 +1,6 @@
 {
-    "title": "Fantasy Premier League Point Totals",
-    "name": "antasy Premier League Point Totals Data Visualization",
+    "title": "fantasy premier league point totals",
+    "name": "fantasy premier league point totals ",
     "version": "1.0.0",
     "description": "This is a data visualization of the current English Premier League team. The size of each team's badge corresponds to the total number of Fantasy Premier League points a team's player's have collected over the course of the season. Data has been normalized and badges are proportional to the normalized score.",
     "keywords": [
